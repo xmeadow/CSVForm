@@ -3,6 +3,8 @@ var Articles = new Array();
 var Articles_Array = new Array();
 var index = 0;
 var input_CSV = document.getElementById("import");
+var Date = new Date()
+
 
 function importCSV()
 {
@@ -43,13 +45,13 @@ function exportCSV()
 
 	let blob = new Blob([out], { type: 'text/csv;charset=utf-8;'});
 	if (navigator.msSaveBlob) {
-		navigator.msSaveBlob(blob, Articles_Array[0][1].value + "_.txt");
+		navigator.msSaveBlob(blob, "PRICAT_" + Articles_Array[0][1].value + "_" + Date.getFullYear() + Date.getMonth() + Date.getDate() + "_.txt");
 	} else {
 		let link = document.createElement("a");
 		if (link.download !== undefined) { // feature detection
 			let url = URL.createObjectURL(blob);
 			link.setAttribute("href", url);
-			link.setAttribute("download", Articles_Array[0][1].value + "_.txt");
+			link.setAttribute("download", "PRICAT_" + Articles_Array[0][1].value + Date.getFullYear() + Date.getMonth() + Date.getDate() + "_.txt");
 			link.style.visibility = 'hidden';
 			document.body.appendChild(link);
 			link.click();

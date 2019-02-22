@@ -18,7 +18,7 @@
 
             <tr><td>
             <label onclick="importCSV()" for="file-upload" class="import">IMPORT</label>
-                <input style="display: none;" id="file-upload" type="file"/>
+                <input style="display: none;" id="file-upload" type="file" accept=".csv,.txt"/>
             </td></tr>
                 <tr><td><button onclick="exportCSV()">EXPORT</button><br></td></tr>
                     <tr><td><button onclick="nextItem()">NEXT</button><br></td></tr>
@@ -38,8 +38,8 @@
             <legend><label for="coll_lf">Lieferant</label></legend>
         
 
-        <label for="lfnr">Lieferanten Nr.: <input id="lfnr" placeholder="Musterfirma" name="lfnr"> </label>
-        <label for="lfnm">Lieferantenname: <input style="width:40vw" id="lfnm" placeholder="ggf. GLN" name="lfnm"> </label>
+        <label for="lfnr">Lieferanten Nr.: <input id="lfnr" placeholder="ggf. GLN" name="lfnr"> </label>
+        <label for="lfnm">Lieferantenname: <input style="width:40vw" id="lfnm" placeholder="Musterfirma" name="lfnm"> </label>
 </fieldset>
 
 <fieldset id="artikel"class="section">
@@ -50,9 +50,10 @@
         <label for="zusbez">Zus. Bezeichnung: <input id="zusbez" name="zusbez"> </label>
         <label for="bls">BLS-Schl&uuml;ssel: <input id="bls" name="bls"> </label>
         <label for="altartnr">Alternative Artikelnummer: <input id="altartnr" name="altartnr"> </label>
-    </div><div>
         <label for="fixbm">Fixe Bestellmenge: <input id="fixbm" name="fixbm"> </label>
-        <label for="kinfo">Kurzinfo (Hinweis): <input id="kinfo" name="kinfo"> </label>
+    </div><div>
+
+        <label for="kinfo">Kurzinfo (Hinweis): <input style="height:15vh;" id="kinfo" name="kinfo"> </label>
         <label for="txtdata">Textdatei: <input id="txtdata" name="txtdata"> </label>
         <label for="pic">Bilddatei: <input id="pic" name="pic"> </label>
         <label for="artknz">Artikelkennzeichen: <input id="artknz" name="artknz"> </label>
@@ -80,7 +81,7 @@
 <fieldset id="bestelleinh"class="section">
         <legend><label for="coll_bs">Bestelleinheit</label></legend>
         <label for="bestelleinheit">Bestelleinheit: <input placeholder="Karton 30Stk" id="bestelleinheit" name="bestelleinheit"> </label>
-        <label for="infobesteleh">Info zur Bestelleinheit : <input id="infobesteleh" name="infobesteleh"> </label>
+        <label for="infobesteleh">Info zur Bestelleinheit: <input id="infobesteleh" name="infobesteleh"> </label>
         <label for="einzeleinheit">Einzeleinheit: <input placeholder="STK" id="einzeleinheit" name="einzeleinheit"> </label>
         <label for="mengedeeh">Menge der Einzeleinheit: <input placeholder="30" id="mengedeeh" name="mengedeeh"> </label>
         <label for="gewichtsartikel">Gewichtsartikel: <input  class ="TorF" value="0" id="gewichtsartikel" name="gewichtsartikel"> </label>
