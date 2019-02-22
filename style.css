@@ -29,6 +29,7 @@ fieldset {
         padding: 6px;
         font-weight: bold;
         border-style: inset;
+        font-family: 'trebuchet ms';
         box-shadow: 2px 2px 5px grey;
         }
 
@@ -49,26 +50,29 @@ input {
 }
 
 
-button {
+button,  .import {
     background-color: rgb(175, 152, 76); /* Green */
     border: none;
+    width: 10vw;
     color: white;
     padding: 16px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 17px;
     margin: 4px 2px;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
     }
 
-    button:hover
+    button:hover, .import:hover
     {
         background-color: #4CAF50;
         color: white;
     }
+
+    
 
 /*hier werden die kurzen Felder behandelt*/
 .TorF, .totwo

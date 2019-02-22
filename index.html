@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <link rel="stylesheet" type="text/css" href="style.css">
-<title>PRIKATZ</title>
+<title>B2B Artikelkatalog</title>
 
 
 
@@ -10,31 +10,26 @@
 
 <body>
 
+<div style="float:left; width: 15%; position: fixed;">
+    <h1>  B2B Artikelkatalog 4.0</h1>
+    <p>Beta - Benutzung auf eigene Gefahr</p>
 
-    <h1 style="float:right">  B2B Artikelkatalog 4.0 - for Delegate MMS     </h1>
+    <table border="0" cellpadding="0" cellspacing="0">
+
+            <tr><td>
+            <label onclick="importCSV()" for="file-upload" class="import">IMPORT</label>
+                <input style="display: none;" id="file-upload" type="file"/>
+            </td></tr>
+                <tr><td><button onclick="exportCSV()">EXPORT</button><br></td></tr>
+                    <tr><td><button onclick="nextItem()">NEXT</button><br></td></tr>
+                        <tr><td><button onclick="prevItem()">PREV</button><br></td></tr>
+</table>
+
+
+</div>
+
 
     <div id="wrapper" >
-    <center>
-    <!--<input id = "import" type = "file" onclick="importCSV()">Import</button>-->
-    <button onclick="exportCSV()">Export</button>
-    <button onclick="nextItem()">NEXT</button>
-    <!--<button onclick="prevItem()">PREV</button>-->
-
-
-    <input style="display: none;" type="checkbox" id="coll_lf">
-    <input style="display: none;" type="checkbox" id="coll_ar">
-    <input style="display: none;" type="checkbox" id="coll_hs">
-    <input style="display: none;" type="checkbox" id="coll_kl">
-    <input style="display: none;" type="checkbox" id="coll_bs">
-    <input style="display: none;" type="checkbox" id="coll_pr">
-    <input style="display: none;" type="checkbox" id="coll_ean">
-    <input style="display: none;" type="checkbox" id="coll_eh">
-    <input style="display: none;" type="checkbox" id="coll_al">
-
-</center>
-
-
-
 
 <form id="PRICAT">
 
@@ -168,4 +163,17 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="exporter.js"></script>
+
+
+
+<input style="display: none;" type="checkbox" id="coll_lf">
+<input style="display: none;" type="checkbox" id="coll_ar">
+<input style="display: none;" type="checkbox" id="coll_hs">
+<input style="display: none;" type="checkbox" id="coll_kl">
+<input style="display: none;" type="checkbox" id="coll_bs">
+<input style="display: none;" type="checkbox" id="coll_pr">
+<input style="display: none;" type="checkbox" id="coll_ean">
+<input style="display: none;" type="checkbox" id="coll_eh">
+<input style="display: none;" type="checkbox" id="coll_al">
+
 </body>
