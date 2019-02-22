@@ -1,0 +1,89 @@
+
+#wrapper
+{
+display: block;
+margin: 0 auto;
+max-width: 60vw;
+left: 0;
+right: 0;
+}
+fieldset {
+    border: 1px solid rgb(0, 62, 104);
+
+    background: rgb(101, 181, 255);
+
+    height: 100%;
+    display: flex;
+
+    margin: .5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    fieldset:hover
+    {
+        background: rgb(160, 208, 253);
+    }
+
+    fieldset legend {
+        background: rgb(176, 219, 253);
+        padding: 6px;
+        font-weight: bold;
+        border-style: inset;
+        box-shadow: 2px 2px 5px grey;
+        }
+
+label { 
+    display: block;
+    float: left;
+    margin-bottom: .2rem;
+    margin-top: .2rem;
+    margin-left: .5rem;
+}
+
+input {
+    width: 10vw;
+    display: block;
+    float: none;
+    margin-bottom: 0.8em;
+
+}
+
+
+button {
+    background-color: rgb(175, 152, 76); /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    }
+
+    button:hover
+    {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+/*hier werden die kurzen Felder behandelt*/
+.TorF, .totwo
+{
+    width: 20px;
+    text-align: center;
+    margin: 0%;
+    display: block;
+}
+
+
+    
+
+    /*Das sind die wichtigen Felder für den PRICAT*/
+	#lfnm, #artnr, #arnm , #bestelleinheit , #einzeleinheit, #gewichtsartikel , #anbruch , #preis , #preisvon , #mengedeeh {
+		
+		border: 3px solid rgb(204, 0, 0);
+	}

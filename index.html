@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>PRIKATZ</title>
+
+
+
+</head>
+
+<body>
+
+
+    <h1 style="float:right">  B2B Artikelkatalog 4.0 - for Delegate MMS     </h1>
+
+    <div id="wrapper" >
+    <center>
+    <!--<input id = "import" type = "file" onclick="importCSV()">Import</button>-->
+    <button onclick="exportCSV()">Export</button>
+    <button onclick="nextItem()">NEXT</button>
+    <!--<button onclick="prevItem()">PREV</button>-->
+
+
+    <input style="display: none;" type="checkbox" id="coll_lf">
+    <input style="display: none;" type="checkbox" id="coll_ar">
+    <input style="display: none;" type="checkbox" id="coll_hs">
+    <input style="display: none;" type="checkbox" id="coll_kl">
+    <input style="display: none;" type="checkbox" id="coll_bs">
+    <input style="display: none;" type="checkbox" id="coll_pr">
+    <input style="display: none;" type="checkbox" id="coll_ean">
+    <input style="display: none;" type="checkbox" id="coll_eh">
+    <input style="display: none;" type="checkbox" id="coll_al">
+
+</center>
+
+
+
+
+<form id="PRICAT">
+
+<fieldset id="lieferant" class="section">
+
+            <legend><label for="coll_lf">Lieferant</label></legend>
+        
+
+        <label for="lfnr">Lieferanten Nr.: <input id="lfnr" placeholder="Musterfirma" name="lfnr"> </label>
+        <label for="lfnm">Lieferantenname: <input style="width:40vw" id="lfnm" placeholder="ggf. GLN" name="lfnm"> </label>
+</fieldset>
+
+<fieldset id="artikel"class="section">
+        <legend><label for="coll_ar">Artikel</label></legend>
+    <div>
+        <label for="artnr">Artikel.Nr.: <input placeholder="1234" id="artnr" name="artnr"> </label>
+        <label for="arnm">Artikelname: <input id="arnm" placeholder="Musterartikel" name="arnm"> </label>
+        <label for="zusbez">Zus. Bezeichnung: <input id="zusbez" name="zusbez"> </label>
+        <label for="bls">BLS-Schl&uuml;ssel: <input id="bls" name="bls"> </label>
+        <label for="altartnr">Alternative Artikelnummer: <input id="altartnr" name="altartnr"> </label>
+    </div><div>
+        <label for="fixbm">Fixe Bestellmenge: <input id="fixbm" name="fixbm"> </label>
+        <label for="kinfo">Kurzinfo (Hinweis): <input id="kinfo" name="kinfo"> </label>
+        <label for="txtdata">Textdatei: <input id="txtdata" name="txtdata"> </label>
+        <label for="pic">Bilddatei: <input id="pic" name="pic"> </label>
+        <label for="artknz">Artikelkennzeichen: <input id="artknz" name="artknz"> </label>
+    </div>
+</fieldset>
+
+<fieldset id="hersteller"class="section">
+
+    <legend><label for="coll_hs">Hersteller</label></legend>
+
+        <label for="gln">GLN (Hersteller): <input id="gln" name="gln"> </label>
+        <label for="herstellerartnr">Hersteller-Artikel-Nr.: <input id="herstellerartnr" name="herstellerartnr"> </label>
+        <label for="hersteller">Hersteller: <input id="hersteller" name="hersteller"> </label>
+        <label for="marke">Marke: <input id="marke" name="marke"> </label>
+</fieldset>
+
+<fieldset id="klassifikation"class="section">
+        <legend><label for="coll_kl">Klassifikation</label></legend>
+    
+        <label for="warengruppe">Warengruppe: <input id="warengruppe" name="warengruppe"> </label>
+        <label for="oberwarengr">Oberwarengruppe: <input id="oberwarengr" name="oberwarengr"> </label>
+        <label for="klassifikation">Klassifikation: <input id="klassifikation" name="klassifikation"> </label>
+</fieldset>
+
+<fieldset id="bestelleinh"class="section">
+        <legend><label for="coll_bs">Bestelleinheit</label></legend>
+        <label for="bestelleinheit">Bestelleinheit: <input placeholder="Karton 30Stk" id="bestelleinheit" name="bestelleinheit"> </label>
+        <label for="infobesteleh">Info zur Bestelleinheit : <input id="infobesteleh" name="infobesteleh"> </label>
+        <label for="einzeleinheit">Einzeleinheit: <input placeholder="STK" id="einzeleinheit" name="einzeleinheit"> </label>
+        <label for="mengedeeh">Menge der Einzeleinheit: <input placeholder="30" id="mengedeeh" name="mengedeeh"> </label>
+        <label for="gewichtsartikel">Gewichtsartikel: <input  class ="TorF" value="0" id="gewichtsartikel" name="gewichtsartikel"> </label>
+        <label for="anbruch">Anbruch: <input  class ="TorF" value="0" id="anbruch" name="anbruch"> </label>
+</fieldset>
+
+<fieldset id="price"class="section">
+        <legend><label for="coll_pr">Preis</label></legend>	
+<div>
+        <label for="preiskennzeichen">Preiskennzeichen: <input  class ="TorF" id="preiskennzeichen" name="preiskennzeichen"> </label>
+        <label for="preisvon">Preis g&uuml;ltig von: <input id="preisvon" placeholder="JJJJMMTT" name="preisvon"> </label>
+        <label for="preisbis">Preis g&uuml;ltig bis: <input id="preisbis" placeholder="JJJJMMTT" name="preisbis"> </label>
+        <label for="tagespreis">Tagespreis- Kennzeichen: <input  class ="TorF" id="tagespreis" name="tagespreis"> </label>
+        <label for="preis">Preis: <input placeholder="1,234" id="preis" name="preis"> </label>
+        <label for="preisproeeh">Preis pro Einzeleinheit: <input id="preisproeeh" name="preisproeeh"> </label>
+    </div><div>
+        <label for="preismenge">Preismenge: <input id="preismenge" name="preismenge"> </label>
+        <label for="rabatt">Rabatt: <input placeholder="als Dezimalzahl zB. 10% = 0,1" id="rabatt" name="rabatt"> </label>
+        <label for="verkaufspreis">Verkaufspreis: <input id="verkaufspreis" name="verkaufspreis"> </label>
+        <label for="preiswaehrung">Preisw&auml;hrung: <input id="preiswaehrung" name="preiswaehrung"> </label>
+        <label for="steuersatz">Steuersatz: <input id="steuersatz" name="steuersatz"> </label>
+        <label for="hafr">Handlungsanforderung: <input  class ="TorF" id="hafr" name="hafr"> </label>
+        <label for="hafrgueltig">Handlungsanforderung g&uuml;ltig ab: <input  class ="TorF" id="hafrgueltig" name="hafrgueltig"> </label>
+        <label for="bestellbar">Artikel bestellbar?: <input value="1" class ="TorF" id="bestellbar" name="bestellbar"> </label>
+        <label for="bestellbarab">Artikel ist bestellbar ab: <input id="bestellbarab" placeholder="JJJJMMTT" name="bestellbarab"> </label>
+        <label for="bestellbarbis">Artikel ist bestellbar bis: <input id="bestellbarbis" placeholder="JJJJMMTT" name="bestellbarbis"> </label>
+    </div>
+</fieldset>
+
+<fieldset id="ean"class="section">
+        <legend><label for="coll_ean">EAN</label></legend>
+        <label for="eanbh">EAN Bestelleinheit: <input placeholder="87654321" id="eanbh" name="eanbh"> </label>
+        <label for="eanpackart">EAN Packungsart: <input placeholder="87654321" id="eanpackart" name="eanpackart"> </label>
+</fieldset>
+
+<fieldset id="einheiten"class="section">
+        <legend><label for="coll_eh">Einheiten</label></legend>
+        <label for="nettogew">Nettogewicht / Abtropfgewicht: <input id="nettogew" name="nettogew"> </label>
+        <label for="basiseinheit">Basiseinheit: <input id="basiseinheit" name="basiseinheit"> </label>
+        <label for="umrfaktorbls">Umrechnungsfaktor f&uuml;r BLS: <input id="umrfaktorbls" name="umrfaktorbls"> </label>
+</fieldset>
+
+<fieldset id="allergene"class="section">
+        <legend><label for="coll_al">Allergene</label></legend>
+    <div>
+        <label for="allergenknz">Allergene - Kennzeichnung: <input class ="TorF" id="allergenknz" name="allergenknz"> </label>
+        <label for="zusatzstoffknz">Zusatzstoff - Kennzeichnung: <input class ="TorF" id="zusatzstoffknz" name="zusatzstoffknz"> </label>
+    </div>
+    <div>
+        <label for="krebstier">Krebstiere (AC): <input placeholder="0" class ="totwo" id="krebstier" name="krebstier"> </label>
+        <label for="eier">Eier (AE): <input placeholder="0" class ="totwo" id="eier" name="eier"> </label>
+        <label for="fisch">Fisch (AF): <input placeholder="0" class ="totwo" id="fisch" name="fisch"> </label>
+        <label for="milch">Milch (AM): <input placeholder="0" class ="totwo" id="milch" name="milch"> </label>
+        <label for="nuss">N&uuml;sse (AN): <input placeholder="0" class ="totwo" id="nuss" name="nuss"> </label>
+        <label for="erdnuss">Erdn&uuml;sse (AP): <input placeholder="0" class ="totwo" id="erdnuss" name="erdnuss"> </label>
+        <label for="sesams">Sesamsamen (AS): <input placeholder="0" class ="totwo" id="sesams" name="sesams"> </label>
+        <label for="sulfur">Schwefeldioxid und Sulphite (AU): <input placeholder="0" class ="totwo" id="sulfur" name="sulfur"> </label>
+        <label for="gluten">Glutenhaltiges Getreide (AW): <input placeholder="0" class ="totwo" id="gluten" name="gluten"> </label>
+        <label for="soja">Sojabohnen (AY): <input placeholder="0" class ="totwo" id="soja" name="soja"> </label>
+        <label for="sellerie">Sellerie (BC): <input placeholder="0" class ="totwo" id="sellerie" name="sellerie"> </label>
+        <label for="senf">Senf (BM): <input placeholder="0" class ="totwo" id="senf" name="senf"> </label>
+        <label for="lupine">Lupine (NL): <input placeholder="0" class ="totwo" id="lupine" name="lupine"> </label>
+        <label for="weicht">Weichtiere (UM): <input placeholder="0" class ="totwo" id="weicht" name="weicht"> </label>
+    </div>
+    <div>
+        <label for="codelisteallergene">Codeliste f&uuml;r Allergene: <input id="codelisteallergene" name="codelisteallergene"> </label>
+        <label for="codelistezusatz">Codeliste f&uuml;r Zusatzstoffe: <input id="codelistezusatz" name="codelistezusatz"> </label>
+        <label for="codelisteinfo">Codeliste f&uuml;r Informationen: <input id="codelisteinfo" name="codelisteinfo"> </label>
+    </div>
+
+</fieldset>
+
+
+</form>
+
+
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="exporter.js"></script>
+</body>
