@@ -1,101 +1,103 @@
 var fields = Array.from(document.getElementsByTagName("input"));
-var Articles = new Array();
-var Articles_Array = new Array();
+var articles = []; 
+var articlesArray = []; 
 var index = 0;
-var input_CSV = document.getElementById("import");
-var Date = new Date()
+var inputCSV = document.getElementById("import"); 
+var currentDate = new Date(); /
 
-
-function importCSV()
-{
-	this.request = new XMLHttpRequest();
-	this.request.timeout = 10000;
-	this.request.open("GET", filepath, true);
-	this.request.parent = this;
-	this.callback = callback;
-	this.request.onload = function() 
-	{
-		var d = this.response.split('\n'); /*1st separator*/
-		var i = d.length;
-		while(i--)
-		{
-			if(d[i] !== "")
-				d[i] = d[i].split(';'); /*2nd separator*/
-			else
-				d.splice(i,1);
-		}
-		this.parent.response = d;
-		if(typeof this.parent.callback !== "undefined")
-			this.parent.callback(d);
-	};
-	this.request.send();
+function importCSV(filepath, callback) { 
+    var request = new XMLHttpRequest();
+    request.timeout = 10000;
+    request.open("GET", filepath, true);
+    request.onload = function() {
+        if (request.status === 200) { 
+            var d = request.response.split('\n'); 
+            var i = d.length;
+            while (i--) {
+                if (d[i] !== "") {
+                    d[i] = d[i].split(';');
+                } else {
+                    d.splice(i, 1);
+                }
+            }
+            if (typeof callback === "function") {
+                callback(d); 
+            }
+        } else {
+            console.error("Failed to load CSV file. Status:", request.status);
+        }
+    };
+    request.onerror = function() {
+        console.error("Error occurred while loading CSV file.");
+    };
+    request.send();
 }
 
-function exportCSV()
-{	
+function exportCSV() {
+    if (articles.length < 1) {
+        nextItem();
+    }
+    let out = articles[0];
 
-	if(Articles.length < 1){
-		nextItem();
-	}
-	let out = Articles[0];
+    for (let i = 1; i < articles.length; i++) {
+        out += "\r\n" + articles[i];
+    }
 
-	for (let i = 1; i < Articles.length; i++) {
-		out += "\r\n" + Articles[i];
-	}
+    let blob = new Blob([out], { type: 'text/csv;charset=utf-8;' });
+    let filename = `PRICAT_${articlesArray[0][1].value}_${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}.txt`; // Fixed month (+1) and filename format
 
-	let blob = new Blob([out], { type: 'text/csv;charset=utf-8;'});
-	if (navigator.msSaveBlob) {
-		navigator.msSaveBlob(blob, "PRICAT_" + Articles_Array[0][1].value + "_" + Date.getFullYear() + Date.getMonth() + Date.getDate() + "_.txt");
-	} else {
-		let link = document.createElement("a");
-		if (link.download !== undefined) { // feature detection
-			let url = URL.createObjectURL(blob);
-			link.setAttribute("href", url);
-			link.setAttribute("download", "PRICAT_" + Articles_Array[0][1].value + Date.getFullYear() + Date.getMonth() + Date.getDate() + "_.txt");
-			link.style.visibility = 'hidden';
-			document.body.appendChild(link);
-			link.click();
-		}
-	}   
-}    
-
-
-function nextItem()
-{
-	
-	let data = $("#PRICAT input").serializeArray();
-	index ++;
-	Articles_Array.push(data);
-	console.log(Articles_Array[0][1]);
-		let out = '"' + data[0].value + '"';
-	
-		for (let i = 1; i < data.length; i++) {
-			out += ";" + '"' + data[i].value + '"';
-		}
-		console.log(out);
-	Articles.push(out);
-	clearFields();
+    if (navigator.msSaveBlob) { // For IE
+        navigator.msSaveBlob(blob, filename);
+    } else {
+        let link = document.createElement("a");
+        if (link.download !== undefined) { // Feature detection
+            let url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link); // Clean up
+        }
+    }
 }
 
-function prevItem()
-{
-	index--;
-	let tmp =  Articles_Array[index];
-	let inputs = $("#PRICAT input");
-	for(let i = 0; i <  $("#PRICAT input").length; i++){
-		if(tmp[i].checked == true){
-			inputs[i].checked = true;
-		}else if(tmp[i].checked == false){
-			inputs[i].checked = true;
-		}else{
-		inputs[i].value = tmp[i].value;
-		}
-	}
+function nextItem() {
+    let data = $("#PRICAT input").serializeArray();
+    index++;
+    articlesArray.push(data);
+    console.log(articlesArray[0][1]);
+
+    let out = '"' + data[0].value + '"';
+    for (let i = 1; i < data.length; i++) {
+        out += ";" + '"' + data[i].value + '"';
+    }
+    console.log(out);
+    articles.push(out);
+    clearFields();
 }
 
-function clearFields()
-{
-	for(x of $("#PRICAT input")){
-		 x.value = null;
-		}
+function prevItem() {
+    if (index > 0) { // Ensure index doesn't go below 0
+        index--;
+        let tmp = articlesArray[index];
+        let inputs = $("#PRICAT input");
+        for (let i = 0; i < inputs.length; i++) {
+            if (tmp[i].checked !== undefined) { // Handle checkboxes
+                inputs[i].checked = tmp[i].checked;
+            } else {
+                inputs[i].value = tmp[i].value;
+            }
+        }
+    }
+}
+
+function clearFields() {
+    $("#PRICAT input").each(function() {
+        if (this.type === "checkbox" || this.type === "radio") {
+            this.checked = false;
+        } else {
+            this.value = "";
+        }
+    });
 }
