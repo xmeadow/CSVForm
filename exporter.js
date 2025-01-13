@@ -1,56 +1,50 @@
 var fields = Array.from(document.getElementsByTagName("input"));
-var articles = []; 
-var articlesArray = []; 
+var articles = []; // Array to store CSV rows
+var articlesArray = []; // Array to store form data
 var index = 0;
-var inputCSV = document.getElementById("import"); 
-var currentDate = new Date(); /
+var inputCSV = document.getElementById("file-upload"); // File input element
+var currentDate = new Date(); // Current date for filename
 
-function importCSV(filepath, callback) { 
-    var request = new XMLHttpRequest();
-    request.timeout = 10000;
-    request.open("GET", filepath, true);
-    request.onload = function() {
-        if (request.status === 200) { 
-            var d = request.response.split('\n'); 
-            var i = d.length;
-            while (i--) {
-                if (d[i] !== "") {
-                    d[i] = d[i].split(';');
-                } else {
-                    d.splice(i, 1);
-                }
-            }
-            if (typeof callback === "function") {
-                callback(d); 
-            }
-        } else {
-            console.error("Failed to load CSV file. Status:", request.status);
-        }
+// Import CSV function
+function importCSV() {
+    const file = inputCSV.files[0]; // Get the selected file
+    if (!file) {
+        alert("Please select a file to import.");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+        const content = event.target.result;
+        const rows = content.split('\n').filter(row => row.trim() !== ""); // Split rows and filter empty lines
+        const data = rows.map(row => row.split(';')); // Split each row into columns
+
+        // Process the imported data (e.g., populate the form)
+        console.log("Imported Data:", data);
+        alert("CSV imported successfully!");
     };
-    request.onerror = function() {
-        console.error("Error occurred while loading CSV file.");
+    reader.onerror = function () {
+        console.error("Error reading file.");
+        alert("Error reading file. Please try again.");
     };
-    request.send();
+    reader.readAsText(file); // Read the file as text
 }
 
+// Export CSV function
 function exportCSV() {
     if (articles.length < 1) {
-        nextItem();
+        nextItem(); // Add the current form data to the articles array
     }
-    let out = articles[0];
 
-    for (let i = 1; i < articles.length; i++) {
-        out += "\r\n" + articles[i];
-    }
+    let out = articles.join("\r\n"); // Join all rows with line breaks
+    let filename = `PRICAT_${articlesArray[0][1].value}_${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}.csv`;
 
     let blob = new Blob([out], { type: 'text/csv;charset=utf-8;' });
-    let filename = `PRICAT_${articlesArray[0][1].value}_${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}.txt`; // Fixed month (+1) and filename format
-
     if (navigator.msSaveBlob) { // For IE
         navigator.msSaveBlob(blob, filename);
     } else {
         let link = document.createElement("a");
-        if (link.download !== undefined) { // Feature detection
+        if (link.download !== undefined) {
             let url = URL.createObjectURL(blob);
             link.setAttribute("href", url);
             link.setAttribute("download", filename);
@@ -62,38 +56,37 @@ function exportCSV() {
     }
 }
 
+// Next Item function
 function nextItem() {
     let data = $("#PRICAT input").serializeArray();
-    index++;
-    articlesArray.push(data);
-    console.log(articlesArray[0][1]);
+    articlesArray.push(data); // Store form data
 
-    let out = '"' + data[0].value + '"';
-    for (let i = 1; i < data.length; i++) {
-        out += ";" + '"' + data[i].value + '"';
-    }
-    console.log(out);
-    articles.push(out);
-    clearFields();
+    let out = data.map(field => `"${field.value}"`).join(";"); // Create CSV row
+    articles.push(out); // Add row to articles array
+    console.log("Added Row:", out);
+
+    clearFields(); // Clear the form for the next entry
 }
 
+// Previous Item function
 function prevItem() {
-    if (index > 0) { // Ensure index doesn't go below 0
+    if (index > 0) {
         index--;
         let tmp = articlesArray[index];
         let inputs = $("#PRICAT input");
-        for (let i = 0; i < inputs.length; i++) {
-            if (tmp[i].checked !== undefined) { // Handle checkboxes
-                inputs[i].checked = tmp[i].checked;
+        inputs.each(function (i) {
+            if (tmp[i].checked !== undefined) { // Handle checkboxes and radio buttons
+                this.checked = tmp[i].checked;
             } else {
-                inputs[i].value = tmp[i].value;
+                this.value = tmp[i].value;
             }
-        }
+        });
     }
 }
 
+// Clear Form Fields function
 function clearFields() {
-    $("#PRICAT input").each(function() {
+    $("#PRICAT input").each(function () {
         if (this.type === "checkbox" || this.type === "radio") {
             this.checked = false;
         } else {
@@ -101,3 +94,6 @@ function clearFields() {
         }
     });
 }
+
+// Attach event listener to the file input
+inputCSV.addEventListener("change", importCSV);
